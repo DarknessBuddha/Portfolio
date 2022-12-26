@@ -1,13 +1,75 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;400&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+}
+html{
+    --primary: #22223B;
+    --secondary: #4A4E69;
+    --tertiary: #9A8C98;
+    --quaternary: #C9ADA7;
+    --quinary: #F2E9E4;
+
+    --h1: 5.653rem;
+    --h2: 3.998rem;
+    --h3: 2.827rem;
+    --h4: 2rem;
+    --h5: 1.414rem;
+    --h6: 1rem;
+
+
+    font-size: 16px;
+    font-family: 'IBM Plex Sans', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html, body, #root{
+    width: 100%;
+    overflow-x: hidden;
+
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+}
+
+h1{
+    font-size: var(--h1);
+}
+
+h2{
+    font-size: var(--h2);
+}
+
+h3{
+    font-size: var(--h3);
+}
+
+h4{
+    font-size: var(--h4);
+}
+
+h5{
+    font-size: var(--h5);
+}
+
+h6{
+    font-size: var(--h6);
+}
+
+@media (max-width: 1600px) {
+    html{
+        font-size: 12px;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 1.1em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--secondary);
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--primary);
 }
