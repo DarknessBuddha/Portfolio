@@ -1,0 +1,16 @@
+.projects {
+    color: var(--quinary);
+    padding: 0 18%;
+}
+
+.projects > h2 {
+    margin-bottom: 3%;
+}
+
+.projects-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+}
+

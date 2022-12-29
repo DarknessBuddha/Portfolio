@@ -1,0 +1,49 @@
+.project-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20%;
+}
+
+.project-container .text-block {
+    font-size: 1.4em;
+    flex: 50;
+    justify-content: center;
+}
+
+.project-container .text-block h4 {
+    color: var(--quaternary);
+}
+
+.project-container .img-container {
+    flex: 50;
+    background-color: #ffffff;
+    border-radius: 2em;
+}
+
+.project-container .img-container > img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+}
+
+@media (max-width: 1510px) {
+    .project-container .text-block {
+        font-size: 1.2vw;
+    }
+}
+
+@media (max-width: 1000px) {
+    .project-container .text-block {
+        margin: 7%;
+        position: absolute;
+        bottom: 0;
+        font-size: 2vw;
+        z-index: 1;
+    }
+
+    .project-container .img-container {
+        filter: brightness(40%);
+    }
+}

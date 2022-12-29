@@ -1,0 +1,4 @@
+.divider {
+    margin: 8em 0;
+    border: solid .125em var(--secondary);
+}

@@ -1,18 +1,36 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { motion } from "framer-motion";
+import {motion, PanInfo, useAnimation} from "framer-motion";
 import '../styles/DegreeWork.css'
 import DegreeItem from "../components/DegreeItem";
 import DegreeItemData from "../data/DegreeItemData";
 import Course from "../components/Course";
 import CoursesData from "../data/CoursesData";
+import InProgressCoursesData from "../data/InProgressCoursesData";
+import InProgressCourse from "../components/InProgressCourse";
 
 const DegreeWork = () => {
+    // carousel
     const [carouselWidth, setCarouselWidth] = useState(0);
     const carousel = useRef<HTMLDivElement>(document.createElement("div"));
     useEffect(() => {
         setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
-    })
+    }, [])
+    const [carouselIndex, setCarouselIndex] = useState(0)
+    const carouselController = useAnimation()
+    const dragEndHandler = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+        const threshold = 50;
+        if (info.velocity.x < -threshold && carouselIndex+1 < InProgressCoursesData.length) {
+            setCarouselIndex(currIndex => currIndex + 1)
+        }
+        else if (info.velocity.x > threshold && carouselIndex-1 >= 0) setCarouselIndex(currIndex => currIndex - 1)
+        carouselController.start("snap").then(() => console.log("new index: " + carouselIndex))
+    }
 
+    useEffect(() => {
+        carouselController.start("snap").then()
+    }, [carouselIndex, carouselController])
+
+    // carets
     const [index, setIndex] = useState(0);
     const caretController = {
         canDecrement: () => index > 0,
@@ -27,59 +45,62 @@ const DegreeWork = () => {
                     <h2><b>Degree</b></h2>
                     <h4>In Progress</h4>
                     <motion.div ref={carousel} className="in-progress-carousel" whileTap={{cursor: "grabbing"}}>
-                        <motion.div drag="x" dragConstraints={{right:0, left: -carouselWidth}} className="in-progress-inner-carousel">
-                            <div className="in-progress-item">
-                                <div className="text-block">
-                                    <h3>CPSC 4420</h3>
-                                    <h2>Artificial Intelligence</h2>
-                                    <p>This course presents fundamental concepts in Artificial Intelligence. Specific topics include uninformed and informed search techniques, game playing, Markov decision processes, reinforcement learning, uncertain knowledge and probabilistic reasoning, constraint satisfaction problems, and supervised learning.</p>
-                                </div>
-                                <div className="img-container">
-                                    <img src={require('../images/AI.png')}  alt="AI"/>
-                                </div>
-                            </div>
-                            <div className="in-progress-item">
-                                <div className="text-block">
-                                    <h3>CPSC 4420</h3>
-                                    <h2>Artificial Intelligence</h2>
-                                    <p>This course presents fundamental concepts in Artificial Intelligence. Specific topics include uninformed and informed search techniques, game playing, Markov decision processes, reinforcement learning, uncertain knowledge and probabilistic reasoning, constraint satisfaction problems, and supervised learning.</p>
-                                </div>
-                                <div className="img-container">
-                                    <img src={require('../images/AI.png')}  alt="AI"/>
-                                </div>
-                            </div>
+                        <motion.div drag="x"
+                                    dragConstraints={{right: 0, left: -carouselWidth}}
+                                    transition={{duration: .6}}
+                                    animate={carouselController}
+                                    variants={{
+                                        snap: { x: carouselIndex * (-carousel.current.offsetWidth)}
+                                    }}
+                                    onDragEnd={dragEndHandler}
+                                    className="in-progress-inner-carousel">
+                            {
+                                InProgressCoursesData.map(course => <InProgressCourse code={course.code}
+                                                                                      name={course.name}
+                                                                                      description={course.description}
+                                                                                      image={course.image} />)
+                            }
                         </motion.div>
+                        <div className="dots-container">
+                            {
+                                InProgressCoursesData.map((course, index) =>
+                                    <div className="dot"
+                                         style={{backgroundColor: index === carouselIndex ? "var(--tertiary)" : "var(--secondary)"}}/> )
+                            }
+                        </div>
+
                     </motion.div>
 
                 </section>
-                <section className="content-container-2">
-                    <div className="completed-courses-module">
-                        <div className="courses-bar">
-                            <h4>Completed Courses</h4>
-                            <nav className="courses-bar__right">
-                                <input placeholder="Search"/>
-                                <div className="carets">
-                                    <i style={{
-                                            opacity: caretController.canDecrement() ? 1 : 0,
-                                            cursor: caretController.canDecrement() ? "pointer" : "initial"
-                                        }}
-                                       onClick={caretController.decrement}
-                                       className="bi bi-caret-left"></i>
-                                    <i style={{
-                                            opacity: caretController.canIncrement() ? 1 : 0,
-                                            cursor: caretController.canIncrement() ? "pointer" : "initial"
-                                        }}
-                                       onClick={caretController.increment}
-                                       className="bi bi-caret-right"></i>
-                                </div>
-                            </nav>
+                <div className="courses-bar">
+                    <h4>Completed Courses</h4>
+                    <nav className="courses-bar__right">
+                        <input placeholder="Search"/>
+                        <div className="carets">
+                            <i style={{
+                                filter: caretController.canDecrement() ? "brightness(100%)" : "brightness(20%)",
+                                cursor: caretController.canDecrement() ? "pointer" : "initial"
+                            }}
+                               onClick={caretController.decrement}
+                               className="bi bi-caret-left"></i>
+                            <i style={{
+                                filter: caretController.canIncrement() ? "brightness(100%)" : "brightness(20%)",
+                                cursor: caretController.canIncrement() ? "pointer" : "initial"
+                            }}
+                               onClick={caretController.increment}
+                               className="bi bi-caret-right"></i>
                         </div>
-                        <div className="courses-container">
+                    </nav>
+                </div>
+
+                <section className="completed-courses-module">
+
+                    <div className="courses-container">
                             { CoursesData.slice(index*6, index*6 + 6).map(
                                 course => <Course name={course.name} code={course.code} image={course.image} color={course.color} />
                             ) }
                         </div>
-                    </div>
+
                     <div className="degree-info-container">
                         { DegreeItemData.map(
                             item => <DegreeItem icon={item.icon} text={item.text} />
