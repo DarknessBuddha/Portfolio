@@ -11,30 +11,46 @@ import InProgressCourse from "../components/InProgressCourse";
 const DegreeWork = () => {
     // carousel
     const [carouselWidth, setCarouselWidth] = useState(0);
+    const [carouselIndex, setCarouselIndex] = useState(0);
+    const [carouselIntervalId, setCarouselIntervalId] = useState(0);
     const carousel = useRef<HTMLDivElement>(document.createElement("div"));
-    useEffect(() => {
-        setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
-    }, [])
-    const [carouselIndex, setCarouselIndex] = useState(0)
-    const carouselController = useAnimation()
-    const dragEndHandler = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-        const threshold = 50;
-        if (info.velocity.x < -threshold && carouselIndex+1 < InProgressCoursesData.length) {
-            setCarouselIndex(currIndex => currIndex + 1)
+
+    const carouselController = {
+        engine: useAnimation(),
+        setTicker: () => {
+            let id = window.setInterval(() => setCarouselIndex(prevIndex => (prevIndex + 1) % InProgressCoursesData.length), 5000);
+            setCarouselIntervalId(id)
+            return id;
+        },
+        onDrag: () => {
+            clearInterval(carouselIntervalId)
+        },
+        OnDragEnd: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+            let id = carouselController.setTicker()
+            setCarouselIntervalId(id)
+            const threshold = 50;
+            if (info.velocity.x < -threshold && carouselIndex + 1 < InProgressCoursesData.length) {
+                setCarouselIndex(currIndex => currIndex + 1)
+            } else if (info.velocity.x > threshold && carouselIndex - 1 >= 0) setCarouselIndex(currIndex => currIndex - 1)
+            carouselController.engine.start("snap").then()
         }
-        else if (info.velocity.x > threshold && carouselIndex-1 >= 0) setCarouselIndex(currIndex => currIndex - 1)
-        carouselController.start("snap").then(() => console.log("new index: " + carouselIndex))
     }
 
     useEffect(() => {
-        carouselController.start("snap").then()
+        setCarouselWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
+        let id = carouselController.setTicker();
+        return () => clearInterval(id)
+    }, [])
+
+    useEffect(() => {
+        carouselController.engine.start("snap").then()
     }, [carouselIndex, carouselController])
 
     // carets
     const [index, setIndex] = useState(0);
     const caretController = {
         canDecrement: () => index > 0,
-        canIncrement: () => (index+1)*6 < CoursesData.length,
+        canIncrement: () => (index + 1) * 6 < CoursesData.length,
         decrement: () => setIndex(curIndex => caretController.canDecrement() ? curIndex - 1 : curIndex),
         increment: () => setIndex(curIndex => caretController.canIncrement() ? curIndex + 1 : curIndex)
     }
@@ -48,24 +64,28 @@ const DegreeWork = () => {
                         <motion.div drag="x"
                                     dragConstraints={{right: 0, left: -carouselWidth}}
                                     transition={{duration: .6}}
-                                    animate={carouselController}
+                                    animate={carouselController.engine}
                                     variants={{
-                                        snap: { x: carouselIndex * (-carousel.current.offsetWidth)}
+                                        snap: {x: carouselIndex * (-carousel.current.offsetWidth)}
                                     }}
-                                    onDragEnd={dragEndHandler}
+                                    onDrag={carouselController.onDrag}
+                                    onDragEnd={carouselController.OnDragEnd}
                                     className="in-progress-inner-carousel">
                             {
                                 InProgressCoursesData.map(course => <InProgressCourse code={course.code}
                                                                                       name={course.name}
                                                                                       description={course.description}
-                                                                                      image={course.image} />)
+                                                                                      image={course.image}/>)
                             }
                         </motion.div>
                         <div className="dots-container">
                             {
                                 InProgressCoursesData.map((course, index) =>
                                     <div className="dot"
-                                         style={{backgroundColor: index === carouselIndex ? "var(--tertiary)" : "var(--secondary)"}}/> )
+                                         style={{
+                                             backgroundColor: index === carouselIndex ? "var(--tertiary)" : "var(--secondary)"
+                                         }}/>
+                                )
                             }
                         </div>
 
@@ -96,15 +116,15 @@ const DegreeWork = () => {
                 <section className="completed-courses-module">
 
                     <div className="courses-container">
-                            { CoursesData.slice(index*6, index*6 + 6).map(
-                                course => <Course name={course.name} code={course.code} image={course.image} color={course.color} />
-                            ) }
-                        </div>
+                        {CoursesData.slice(index * 6, index * 6 + 6).map(
+                            course => <Course name={course.name} code={course.code} image={course.image}/>
+                        )}
+                    </div>
 
                     <div className="degree-info-container">
-                        { DegreeItemData.map(
-                            item => <DegreeItem icon={item.icon} text={item.text} />
-                        ) }
+                        {DegreeItemData.map(
+                            item => <DegreeItem icon={item.icon} text={item.text}/>
+                        )}
                     </div>
                 </section>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../styles/Tool.css'
+import {motion, useAnimation} from "framer-motion";
 
 export type ToolProp = {
     image: React.ReactNode
@@ -7,10 +8,19 @@ export type ToolProp = {
 }
 
 const Tool = ( { image, color }: ToolProp) => {
+    const controller = useAnimation()
     return (
-        <div className="tool-container" style={{ backgroundColor: color }}>
-            { image }
-        </div>
+        <motion.div className="tool-container"
+                    style={{backgroundColor: color}}
+                    animate={controller}
+                    onHoverStart={() => controller.start("jump")}
+                    onHoverEnd={() => controller.start("idle")}
+                    variants={{
+                        idle: {y: 0},
+                        jump: {y: -20}
+                    }}>
+            {image}
+        </motion.div>
     );
 };
 

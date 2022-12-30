@@ -13,10 +13,10 @@ const About = () => {
                     <p>Let’s go to Mars!</p>
                 </div>
                 <div className="palettes-container">
-                    <div className="palette" />
-                    <div className="palette" />
-                    <div className="palette" />
-                    <div className="palette" />
+                    <div className="palette"/>
+                    <div className="palette"/>
+                    <div className="palette"/>
+                    <div className="palette"/>
 
                 </div>
             </div>

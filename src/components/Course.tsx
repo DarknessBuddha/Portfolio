@@ -3,15 +3,14 @@ import '../styles/Course.css'
 
 export type CourseProp = {
     image?: React.ReactNode
-    color?: string
     code: string
     name: string
 }
 
-const Course = ( {image, color = "white", code, name}: CourseProp) => {
+const Course = ( {image, code, name}: CourseProp) => {
     return (
         <div className="course-container">
-            <div className="course-visual" style={{ background: color }}>
+            <div className="course-visual">
                 <div className="img-container">
                     { image }
                 </div>

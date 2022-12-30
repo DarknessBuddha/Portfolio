@@ -8,6 +8,7 @@ import DegreeWork from "./sections/DegreeWork";
 import Projects from "./sections/Projects";
 import TechStack from "./sections/TechStack";
 import Divider from "./components/Divider";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Divider />
         <TechStack />
         <Divider />
+        <Footer />
     </div>
   );
 }

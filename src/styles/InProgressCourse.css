@@ -29,6 +29,7 @@
 
 .in-progress-item .img-container {
     flex: 50;
+    border-radius: 2em;
 }
 
 .in-progress-item .img-container > img {
