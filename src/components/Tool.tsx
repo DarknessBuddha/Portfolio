@@ -1,13 +1,13 @@
 import React from 'react';
 import '../styles/Tool.css'
-import {motion, useAnimation} from "framer-motion";
+import {motion, useAnimation, HTMLMotionProps} from "framer-motion";
 
-export type ToolProp = {
+export interface ToolProp extends HTMLMotionProps<'div'>{
     image: React.ReactNode
     color: string
 }
 
-const Tool = ( { image, color }: ToolProp) => {
+const Tool = ( { image, color, ...props }: ToolProp) => {
     const controller = useAnimation()
     return (
         <motion.div className="tool-container"
@@ -17,8 +17,9 @@ const Tool = ( { image, color }: ToolProp) => {
                     onHoverEnd={() => controller.start("idle")}
                     variants={{
                         idle: {y: 0},
-                        jump: {y: -20}
-                    }}>
+                        jump: {y: "-5%"}
+                    }}
+                    {...props}>
             {image}
         </motion.div>
     );

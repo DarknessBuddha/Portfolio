@@ -1,0 +1,25 @@
+.in-progress-carousel {
+    position: relative;
+    cursor: grab;
+    overflow: hidden;
+}
+
+.in-progress-inner-carousel {
+    display: flex;
+}
+
+.dots-container {
+    position: absolute;
+    bottom: 2em;
+    left: 1em;
+    display: flex;
+    gap: .5em;
+}
+
+.dot {
+    position: relative;
+    aspect-ratio: 1;
+    width: .75em;
+    border-radius: 50%;
+    background-color: var(--secondary);
+}

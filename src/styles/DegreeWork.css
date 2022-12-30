@@ -21,15 +21,7 @@
     margin: 0 auto;
 }
 
-.in-progress-carousel {
-    position: relative;
-    cursor: grab;
-    overflow: hidden;
-}
 
-.in-progress-inner-carousel {
-    display: flex;
-}
 
 
 .completed-courses-module {
@@ -68,20 +60,6 @@
     border-radius: 2em;
     outline: none;
     font-size: 1rem;
-}
-
-.carets {
-    display: flex;
-    flex-direction: row;
-    font-size: 2rem;
-}
-
-.carets > i:hover {
-    text-shadow: 0 0 0.5em currentColor;
-}
-
-.carets > i:active {
-    filter: brightness(50%) !important;
 }
 
 .courses-container {

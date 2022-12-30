@@ -2,9 +2,9 @@ import React from 'react';
 import '../styles/Header.css'
 
 
-const Header = () => {
+const Header = (props: React.HTMLAttributes<HTMLHeadElement>) => {
     return (
-        <header className="header">
+        <header className="header" {...props}>
             <nav className="header__left">
                 <a href="/">
                     <img className="buddha-icon" src={require('../images/buddha.png')} alt="buddha"/>

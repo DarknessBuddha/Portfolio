@@ -1,0 +1,13 @@
+.carets {
+    display: flex;
+    flex-direction: row;
+    font-size: 2rem;
+}
+
+.carets > i:hover {
+    text-shadow: 0 0 0.5em currentColor;
+}
+
+.carets > i:active {
+    filter: brightness(50%) !important;
+}

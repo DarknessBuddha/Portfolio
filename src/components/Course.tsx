@@ -1,15 +1,15 @@
 import React from 'react';
 import '../styles/Course.css'
 
-export type CourseProp = {
+export interface CourseProp extends React.HTMLAttributes<HTMLDivElement>{
     image?: React.ReactNode
     code: string
     name: string
 }
 
-const Course = ( {image, code, name}: CourseProp) => {
+const Course = ( {image, code, name, ...props}: CourseProp) => {
     return (
-        <div className="course-container">
+        <div className="course-container" {...props}>
             <div className="course-visual">
                 <div className="img-container">
                     { image }

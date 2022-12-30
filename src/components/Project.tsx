@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/Project.css'
 
-export type ProjectProp = {
+export interface ProjectProp extends React.HTMLAttributes<HTMLDivElement>{
     title: string
     description: string
     image: React.ReactNode
@@ -9,9 +9,9 @@ export type ProjectProp = {
     reverse?: boolean
 }
 
-const Project = ( { title, description, image, color, reverse=false }: ProjectProp ) => {
+const Project = ( { title, description, image, color, reverse=false, ...props }: ProjectProp ) => {
     return (
-        <div className="project-container" style={{flexFlow: reverse? "row-reverse" : "initial"}}>
+        <div className="project-container" style={{flexFlow: reverse? "row-reverse" : "initial"}} {...props}>
             <div className="text-block">
                 <h4>{ title }</h4>
                 <p>{ description }</p>

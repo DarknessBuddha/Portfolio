@@ -1,16 +1,16 @@
 import React from 'react';
 import '../styles/InProgressCourse.css'
 
-export type InProgressCourseProp = {
+export interface InProgressCourseProp extends React.HTMLAttributes<HTMLDivElement>{
     code: string
     name: string
     description: string
     image: React.ReactNode
 }
 
-const InProgressCourse = ( {code, name, description, image}: InProgressCourseProp ) => {
+const InProgressCourse = ( {code, name, description, image, ...props}: InProgressCourseProp ) => {
     return (
-        <div className="in-progress-item">
+        <div className="in-progress-item" {...props}>
             <div className="text-block">
                 <h3>{ code }</h3>
                 <h2>{ name }</h2>

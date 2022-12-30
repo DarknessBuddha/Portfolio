@@ -40,21 +40,7 @@
     pointer-events: none;
 }
 
-.dots-container {
-    position: absolute;
-    bottom: 2em;
-    left: 1em;
-    display: flex;
-    gap: .5em;
-}
 
-.dot {
-    position: relative;
-    aspect-ratio: 1;
-    width: .75em;
-    border-radius: 50%;
-    background-color: var(--secondary);
-}
 
 @media (max-width: 2300px) {
     .in-progress-item {
