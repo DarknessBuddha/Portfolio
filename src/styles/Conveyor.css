@@ -1,7 +1,6 @@
 .conveyor {
     top: -20%;
     left: -20%;
-
     position: absolute;
     width: 100%;
     height: 12%;
@@ -10,9 +9,21 @@
 }
 
 .inner-conveyor {
+    position: absolute;
     display: flex;
     align-items: center;
     height: 100%;
     font-size: 5em;
     gap: 1em;
+    padding-right: 1em;
+}
+
+@media (max-width: 1000px) {
+    .conveyor {
+        width: 190%;
+        top: 50%;
+        left: -50%;
+        z-index: 0;
+        filter: brightness(50%);
+    }
 }
