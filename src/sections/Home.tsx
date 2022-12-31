@@ -1,9 +1,12 @@
 import React from 'react';
 import '../styles/Home.css'
+import Conveyor from "../components/Conveyor";
 
 const Home = () => {
     return (
         <section className="home">
+            <Conveyor />
+
             <div className="content-container">
                 <div className="text-block">
                     <h4>Hello World!</h4>
