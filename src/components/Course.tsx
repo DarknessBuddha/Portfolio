@@ -7,9 +7,9 @@ export interface CourseProp extends React.HTMLAttributes<HTMLDivElement>{
     name: string
 }
 
-const Course = ( {image, code, name, ...props}: CourseProp) => {
+const Course = ( {image, code, name, ...prop }: CourseProp) => {
     return (
-        <div className="course-container" {...props}>
+        <div className="course-container" { ...prop }>
             <div className="course-visual">
                 <div className="img-container">
                     { image }

@@ -2,16 +2,15 @@ import React from 'react';
 import '../styles/DegreeWork.css'
 import DegreeItem from "../components/DegreeItem";
 import DegreeItemData from "../data/DegreeItemData";
-import Course from "../components/Course";
-import CoursesData from "../data/CoursesData";
 import Carousel from "../components/Carousel";
 import InProgressCoursesData from "../data/InProgressCoursesData";
 import useCarets from "../hooks/useCarets";
-
+import Courses from "../components/Courses";
 
 const DegreeWork = () => {
 
     const { Carets, index } = useCarets();
+
 
     return (
         <section className="degree-work">
@@ -31,15 +30,11 @@ const DegreeWork = () => {
                 </div>
 
                 <section className="completed-courses-module">
-                    <div className="courses-container">
-                        {CoursesData.slice(index * 6, index * 6 + 6).map(
-                            course => <Course {...course} />
-                        )}
-                    </div>
+                    <Courses index={index}/>
 
                     <div className="degree-info-container">
                         {DegreeItemData.map(
-                            item => <DegreeItem icon={item.icon} text={item.text}/>
+                            item => <DegreeItem {...item}/>
                         )}
                     </div>
                 </section>

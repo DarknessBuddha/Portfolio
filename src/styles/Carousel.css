@@ -23,3 +23,13 @@
     border-radius: 50%;
     background-color: var(--secondary);
 }
+
+@media (max-width: 720px) {
+
+    .dots-container {
+        bottom: initial;
+        left: initial;
+        top: 2em;
+        right: 1em;
+    }
+}
