@@ -27,7 +27,8 @@ const useCarets = (data: CourseProp[]) => {
                    onClick={caretController.increment}
                    className="bi bi-caret-right"></i>
             </div>),
-        index
+        index,
+        setIndex
     };
 };
 

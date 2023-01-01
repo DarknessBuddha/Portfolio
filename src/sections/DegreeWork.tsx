@@ -17,7 +17,7 @@ const DegreeWork = () => {
             item.code?.toLowerCase().includes(search?.toLowerCase())
         ))
     }, [search])
-    const { Carets, index } = useCarets(filteredCourses);
+    const { Carets, index, setIndex } = useCarets(filteredCourses);
 
     return (
         <section className="degree-work">
@@ -31,7 +31,10 @@ const DegreeWork = () => {
                 <div className="courses-bar">
                     <h4>Completed Courses</h4>
                     <nav className="courses-bar__right">
-                        <input onChange={e => setSearch(e.currentTarget.value)} value={search} placeholder="Search"/>
+                        <input onChange={e => {
+                            setSearch(e.currentTarget.value)
+                            setIndex(0)
+                        }} value={search} placeholder="Search"/>
                         <Carets />
                     </nav>
                 </div>
