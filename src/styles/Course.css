@@ -40,3 +40,9 @@
 .course-container > h5 {
     margin-top: .5em;
 }
+
+@media (max-width: 800px) {
+    .course-container {
+        font-size: 10px;
+    }
+}
