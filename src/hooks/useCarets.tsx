@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import CoursesData from "../data/CoursesData";
 import '../styles/Carets.css'
+import {CourseProp} from "../components/Course";
 
-const useCarets = () => {
+
+const useCarets = (data: CourseProp[]) => {
     const [index, setIndex] = useState(0);
     const caretController = {
         canDecrement: () => index > 0,
-        canIncrement: () => (index + 1) * 6 < CoursesData.length,
+        canIncrement: () => (index + 1) * 6 < data.length,
         decrement: () => setIndex(curIndex => caretController.canDecrement() ? curIndex - 1 : curIndex),
         increment: () => setIndex(curIndex => caretController.canIncrement() ? curIndex + 1 : curIndex)
     }

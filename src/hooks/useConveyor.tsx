@@ -17,10 +17,6 @@ const useConveyor = () => {
         setWidth(conveyor.current.offsetWidth)
     }, [])
 
-    useEffect(() => {
-        console.log(width)
-    }, [width])
-
     return {
             Conveyor: () => (
                 <motion.div className="conveyor"

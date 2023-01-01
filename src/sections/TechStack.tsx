@@ -13,7 +13,7 @@ const TechStack = () => {
             <Slider data={ToolsData} />
             <h3>Languages</h3>
             <div className="languages-container">
-                {LanguagesData.map(language => <Language {...language}/>)}
+                {LanguagesData.map((language, index) => <Language key={index} {...language}/>)}
             </div>
         </section>
     );

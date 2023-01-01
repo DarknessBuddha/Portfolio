@@ -1,17 +1,18 @@
 import React from 'react';
 import '../styles/Courses.css'
-import CoursesData from "../data/CoursesData";
-import Course from "./Course";
+import Course, {CourseProp} from "./Course";
 
 export interface CoursesProp {
-    index: number
+    index: number,
+    data: CourseProp[]
 }
 
-const Courses = ( { index }:CoursesProp ) => {
+const Courses = ( { index, data }:CoursesProp ) => {
     return (
         <div className="courses-container" >
-            {CoursesData.slice(index * 6, index * 6 + 6).map(
-                course => <Course {...course} />
+            {data
+                .slice(index * 6, index * 6 + 6).map(
+                (course, index) => <Course key={index} {...course} />
             )}
         </div>
     );

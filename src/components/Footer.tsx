@@ -5,7 +5,7 @@ import FooterData from "../data/FooterData";
 const Footer = (props: React.HTMLAttributes<HTMLDivElement>) => {
     return (
         <div className="footer" {...props}>
-            { FooterData.map(source => <p>{source}</p>)}
+            { FooterData.map((source, index) => <p key={index}>{source}</p>)}
         </div>
     );
 };

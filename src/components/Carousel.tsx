@@ -57,13 +57,13 @@ const Carousel = ( { data, interval=5000 }: CarouselProp ) => {
                         onDragEnd={carouselController.OnDragEnd}
                         className="in-progress-inner-carousel">
                 {
-                    data.map(course => <InProgressCourse {...course} />)
+                    data.map((course, index) => <InProgressCourse key={index} {...course} />)
                 }
             </motion.div>
             <div className="dots-container">
                 {
                     data.map((course, index) =>
-                        <div className="dot"
+                        <div key={index} className="dot"
                              style={{
                                  backgroundColor: index === carouselIndex ? "var(--tertiary)" : "var(--secondary)"
                              }}/>

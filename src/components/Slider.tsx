@@ -27,10 +27,10 @@ const Slider = ({ data, ...props }: SliderProp) => {
                             delay: 0
                         }}>
                 <div className="tools-container-wrapper">
-                    {Array.from(Array(duplicates), () => {
-                        return (<div ref={carousel} className="tools-container">
+                    {Array.from(Array(duplicates), (_, index) => {
+                        return (<div key={index} ref={carousel} className="tools-container">
                             {
-                                data.map(tool => <Tool {...tool}/>)
+                                data.map((tool, index) => <Tool key={index} {...tool}/>)
                             }
                         </div>)
                     })}
