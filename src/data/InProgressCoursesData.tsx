@@ -34,6 +34,12 @@ const InProgressCoursesData: InProgressCourseProp[] = [
         name: "Film",
         description: "Examination of the film medium as an art form: its history, how films are made, why certain types of films (western, horror movies, etc.) have become popular, and how critical theories provide standards for judging film.",
         image: <img src={require('../images/engl_3570.jpg')} alt=""/>
+    },
+    {
+        code: "FIN 2010",
+        name: "Introduction to Personal Finance I",
+        description: "Provides an introductory overview of personal finance with an emphasis on budgeting; consumer credit, including student loans, credit cards, and basic bank loans; personal bank services; and purchasing an automobile and property insurance. ",
+        image: <img src={require('../images/fin_2010.jpg')} alt=""/>
     }
 
 ]

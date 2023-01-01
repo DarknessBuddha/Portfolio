@@ -35,6 +35,26 @@ const CoursesData: CourseProp[] = [
         code: "MATH 3110",
         name: "Linear Algebra",
         image: <img src={require('../images/math_3110.jpg')} alt=""/>,
+    },
+    {
+        code: "PHYS 2210",
+        name: "Physics with Calculus II",
+        image: <img src={require('../images/phys_2210.png')} alt=""/>,
+    },
+    {
+        code: "PSYC 2010",
+        name: "Intro to Psychology",
+        image: <img src={require('../images/psyc_2010.png')} alt=""/> ,
+    },
+    {
+        code: "BIOL 1040",
+        name: "General Biology II",
+        image: <img src={require('../images/biol_1040.png')} alt=""/>
+    },
+    {
+        code: "COMM 2500",
+        name: "Public Speaking",
+        image: <img src={require('../images/comm_2500.png')} style={{background: "white"}} alt=""/>
     }
 ]
 
